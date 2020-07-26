@@ -1,0 +1,23 @@
+.checked-icon-hidden {
+  height: 10%;
+  width: 10%;
+  display: none;
+}
+
+.checked-icon {
+  height: 10%;
+  width: 10%;
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.appear {
+  display: block;
+}
+
+.hidden-scroll{
+  overflow: auto;
+}

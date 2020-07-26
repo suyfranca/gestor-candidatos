@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Gestor de Candidatos</title>
+</head>
+
+<body>
+
+  <!-- Modal -->
+  <div class="modal fade" data-js="modalApplicant" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Candidatos</h5>
+        </div>
+        <div class="modal-body">
+          <!-- adicionar candidatos-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-js="modaClosed">
+            Fechar
+          </button>
+          <button type="button" class="btn btn-primary" data-js="saveApplicant">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fim do Modal -->
+
+  <!-- Header -->
+
+  <nav class="navbar navbar-light bg-primary">
+    <span class="navbar-brand text-white mb-0 h1">Gestor de Candidatos</span>
+  </nav>
+  
+  <!-- Fim do Header -->
+
+  <section class="container">
+    <div class="my-4 text-center">
+      <h2 class="display-5 text-primary">Pesquisar</h2>
+    </div>
+
+    <!-- Formulário -->
+
+    <div class="row">
+      <div class="col-6">
+        <form class="p-3" action="">
+            <div class="form-group">
+              <label for="applicant">Nome completo</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                data-js="inputName" 
+                id="applicant"
+              />
+            </div>
+            <div class="form-group">
+              <label for="emailApplicant">E-mail</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                data-js="email" 
+                id="emailApplicant"
+              />
+            </div>
+            <div class="form-group">
+              <label for="salaryExpectation">
+                Pretensão Salarial <span class="small">(valores máximos)</span>
+              </label>
+              <input 
+                type="number" 
+                class="form-control" 
+                data-js="salary"
+                id="salaryExpectation"
+              />
+            </div>
+
+            <!-- Checkbox list -->
+
+            <div class="row">
+              <div class="col-12">
+                <label>Competências</label>
+              </div>
+            </div>
+            <div class="row pl-4 pt-2">
+              <div class="col-4">
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="python" 
+                    data-js="checkSkills" 
+                    value="Python"
+                  />
+                  <label class="form-check-label" for="python">Python</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="javascript" 
+                    data-js="checkSkills" 
+                    value="JavaScript"
+                  />
+                  <label class="form-check-label" for="javascript">Javascript</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="c#" 
+                    data-js="checkSkills" 
+                    value="C#"
+                  />
+                  <label class="form-check-label" for="c#">C#</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="c" 
+                    data-js="checkSkills" 
+                    value="C"
+                  />
+                  <label class="form-check-label" for="c">C</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="c++" 
+                    data-js="checkSkills" 
+                    value="C++"
+                  />
+                  <label class="form-check-label" for="c++">C++</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="java" 
+                    data-js="checkSkills" 
+                    value="Java"
+                  />
+                  <label class="form-check-label" for="java">Java</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="php" 
+                    data-js="checkSkills" 
+                    value="PHP"
+                  />
+                  <label class="form-check-label" for="php">PHP</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="ruby" 
+                    data-js="checkSkills" 
+                    value="Ruby"
+                  />
+                  <label class="form-check-label" for="ruby">Ruby</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="cobol" 
+                    data-js="checkSkills" 
+                    value="COBOL"
+                  />
+                  <label class="form-check-label" for="cobol">COBOL</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="ux" 
+                    data-js="checkSkills" 
+                    value="UX"
+                  />
+                  <label class="form-check-label" for="ux">UX</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="ui" 
+                    data-js="checkSkills" 
+                    value="UI"
+                  />
+                  <label class="form-check-label" for="ui">UI</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="photoshop" 
+                    data-js="checkSkills" 
+                    value="Photoshop"
+                  />
+                  <label class="form-check-label" for="photoshop">Photoshop</label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="inkscape" 
+                    data-js="checkSkills" 
+                    value="Inkscape"
+                  />
+                  <label class="form-check-label" for="inkscape">Inkscape</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="linux" 
+                    data-js="checkSkills" 
+                    value="Linux"
+                  />
+                  <label class="form-check-label" for="linux">Linux</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="css" 
+                    data-js="checkSkills" 
+                    value="CSS"
+                  />
+                  <label class="form-check-label" for="css">CSS</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="html" 
+                    data-js="checkSkills" 
+                    value="HTML"
+                  />
+                  <label class="form-check-label" for="html">HTML</label>
+                </div>
+                <div class="form-group form-check">
+                  <input 
+                    type="checkbox" 
+                    class="form-check-input" 
+                    id="management" 
+                    data-js="checkSkills" 
+                    value="Gestão"
+                  />
+                  <label class="form-check-label" for="management">Gestão</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fim da CheckboxList -->
+
+          <!-- Lado direito, espelho da pesquisa -->
+      
+          <div class="col-6">
+            <div class="bg-light rounded p-3 box-shadow w-100 h-100">
+              <div class="p-3 d-flex">
+                <img src="check-icon.svg" class="checked-icon-hidden" data-js="searchIcon" alt="">
+                <input 
+                  type="text"
+                  class="form-control-plaintext w-100" 
+                  data-js="fieldName"
+                  value=""
+                  readonly
+                />
+              </div>
+              <div class="p-3 d-flex">
+                <img src="check-icon.svg" class="checked-icon-hidden" data-js="searchIcon" alt="">
+                <input 
+                  type="text"
+                  class="form-control-plaintext w-100" 
+                  data-js="fieldEmail"
+                  value=""
+                  readonly
+                />          
+              </div>
+              <div class="p-3 d-flex">
+                <img src="check-icon.svg" class="checked-icon-hidden" data-js="searchIcon" alt="">
+                <input 
+                  type="text"
+                  class="form-control-plaintext w-100" 
+                  data-js="fieldSalaryExpectation"
+                  value=""
+                  readonly
+                />
+              </div>
+              <div class="p-3 d-flex">
+                <img src="check-icon.svg" class="checked-icon-hidden" data-js="searchIcon" alt="">
+                <textarea
+                  type="text"
+                  class="form-control-plaintext scroll-hidden w-100" 
+                  data-js="fieldSkills"
+                  value=""
+                  readonly>
+                </textarea>
+              </div>
+              <div class="p-3 d-flex justify-content-center mx-auto">
+                <button data-js="searchBtn" class="btn btn-primary hidden">
+                  Realizar pesquisa
+                </button>
+              </div>
+            </div>
+        </form>
+
+        <!-- Fim do formulário -->
+
+      </div>
+    </div>
+  </section>
+  <script src="js/script.js"></script>
+</body>
+</html>

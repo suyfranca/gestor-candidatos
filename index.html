@@ -22,7 +22,7 @@
           <!-- adicionar candidatos-->
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-js="modaClosed">
+          <button type="button" class="btn btn-secondary" data-js="modalClose">
             Fechar
           </button>
           <button type="button" class="btn btn-primary" data-js="saveApplicant">
@@ -60,6 +60,7 @@
                 class="form-control" 
                 data-js="inputName" 
                 id="applicant"
+                value=""
               />
             </div>
             <div class="form-group">
@@ -69,17 +70,19 @@
                 class="form-control" 
                 data-js="email" 
                 id="emailApplicant"
+                value=""
               />
             </div>
             <div class="form-group">
               <label for="salaryExpectation">
-                Pretensão Salarial <span class="small">(valores máximos)</span>
+                Pretensão Salarial <span class="small">(até)</span>
               </label>
               <input 
                 type="number" 
                 class="form-control" 
                 data-js="salary"
                 id="salaryExpectation"
+                value=""
               />
             </div>
 

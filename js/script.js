@@ -12,32 +12,35 @@
     },
     { 
       id: 2,
-      nome: 'Maria',
-      sobrenome: 'Silva',
+      name: 'Maria',
+      lastName: 'Silva',
       email: 'msilva@gmail.com',
       salaryExpectation: 3500,
       skills: [ 'Java', 'Gestão', 'PHP', 'Linux' ]
     },
     { 
       id: 3,
-      nome: 'Ana',
-      sobrenome: 'Beatriz',
+      name: 'Ana',
+      lastName: 'Beatriz',
       email: 'abeatriz@gmail.com',
       salaryExpectation: 1000,
       skills: [ 'HTML' ]
     },
     { 
       id: 4,
-      nome: 'Matheus',
-      sobrenome: 'Sousa',
+      name: 'Matheus',
+      lastName: 'Sousa',
       email: 'msousa@gmail.com',
       salaryExpectation: 1900,
       skills: [ 'HTML', 'CSS', 'Linux' ]
     }
   ];
 
-  let idControl = candidates.length;
   let skillsList = [];
+  let fieldsFilled = [];
+
+  let $closeModal = doc.querySelector( '[data-js="modalClose"]' );
+  let $saveModal = doc.querySelector( '[data-js="saveApplicant"]' );
 
   let $inputName = doc.querySelector( '[data-js="inputName"]' );
   let $email = doc.querySelector( '[data-js="email"]' );
@@ -57,10 +60,9 @@
     
   let $icon = doc.querySelector( '[data-js="searchIcon"]' );
   let $btn = doc.querySelector( '[data-js="searchBtn"]' ); 
-  let fields = [$inputName, $email, $salary, $skills];
+  let fields = [$inputName, $email, $salary];
   
   /**Conteúdo espelhado à direita */
-
   function onChange( element1, element2, event ){
     element1.addEventListener( event, function(){
       element2.value = element1.value;
@@ -94,14 +96,63 @@
   }
 
   /**Busca candidato */
-
   $btn.addEventListener( 'click', searchApplicant, false );
 
-  function searchApplicant( event, name, email, salaryExp, skills ){
+  function searchApplicant( event ){
     event.preventDefault();
     $modal.className = "modal collapse show";
-    return console.log( 'foo' );
-    //1.Pesquisar parametros 
+    isItFilled();
+
+    if ( fieldsFilled.indexOf( 'applicant' ) !== -1 )
+      searchByName();
+
+    if ( fieldsFilled.indexOf( 'emailApplicant' ) !== -1 )
+      searchByEmail();
+    
+    if ( fieldsFilled.indexOf( 'salaryExpectation' ) !== -1 )
+      searchBySalary();
+
+    fieldsFilled = [];
+    }    
+  
+  /**Verifica os campos preenchidos */
+  function isItFilled(){
+    let result = fields.forEach( function( field ){
+      if ( field.value != "" )
+        fieldsFilled.push(field.id);
+    });
   }
 
-})(document, window);
+  /** Buscas */
+  function searchByName(){
+    let byName = candidates.filter( function( item ){
+      return item.name == $inputName.value;
+    });
+    return byName;
+  }
+
+  function searchByEmail(){
+    let byEmail = candidates.filter( function( item ){
+      return item.email == $email.value;
+    });
+    return byEmail;
+  }
+
+  function searchBySalary(){
+    let bySalary = candidates.filter( function( item ){
+      return item.salaryExpectation <= $salary.value;
+    });
+    return bySalary;
+  }
+
+  
+  /** Botões do Modal */
+
+  $closeModal.addEventListener( 'click', closeModal, false );
+
+  function closeModal( event ){
+    event.preventDefault();
+    $modal.className = "modal fade";
+  }
+
+  })(document, window);

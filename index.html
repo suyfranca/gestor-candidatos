@@ -18,16 +18,15 @@
         <div class="modal-header">
           <h5 class="modal-title">Candidatos</h5>
         </div>
-        <div class="modal-body">
-          <!-- adicionar candidatos-->
+        <div class="modal-body" data-js="modal-body">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-js="modalClose">
             Fechar
           </button>
-          <button type="button" class="btn btn-primary" data-js="saveApplicant">
+          <!-- <button type="button" class="btn btn-primary" data-js="saveApplicant">
             Salvar
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
@@ -50,20 +49,20 @@
         <div class="my-4 text-center">
           <h2 class="display-6 text-primary">Cadastro</h2>
         </div>
-        <form class="p-3" action="">
+        <form class="p-3" action="" id="form">
           <div class="form-group">
             <label for="applicant">Nome completo</label>
-            <input type="text" class="form-control" data-js="inputName" id="applicant" value="" />
+            <input type="text" class="form-control" data-js="inputName" id="applicant" value="" required />
           </div>
           <div class="form-group">
             <label for="emailApplicant">E-mail</label>
-            <input type="email" class="form-control" data-js="email" id="emailApplicant" value="" />
+            <input type="email" class="form-control" data-js="email" id="emailApplicant" value="" required />
           </div>
           <div class="form-group">
             <label for="salaryExpectation">
               Pretensão Salarial <span class="small">(até)</span>
             </label>
-            <input type="number" class="form-control" data-js="salary" id="salaryExpectation" value="" />
+            <input type="number" class="form-control" data-js="salary" id="salaryExpectation" value="" required/>
           </div>
 
           <!-- Checkbox list -->
@@ -172,17 +171,25 @@
             <h2 class="display-6 text-primary">Filtros</h2>
           </div>
           <div class="form-group p-3w-100">
-            <label for="salaryExpectation">
-              Pretensão Salarial
+            <label for="salaryExpectationFilter" class="text-center w-100">
+              Pretensão Salarial <span class="small">(até)</span>
             </label>
-            <input type="text" class="form-control-plaintext" data-js="fieldSalaryExpectation" name="salaryExpectation"
-              id="salaryExpectation">
+            <input 
+              type="text" 
+              class="form-control" 
+              data-js="salaryExpectationFilter" 
+              id="salaryExpectationFilter" 
+              value="" 
+              placeholder="exemplo: 1000"
+            />
           </div>
+          <label for="salaryExpectationFilter" class="text-center w-100">
+            Competências
+          </label>
           <div class="d-flex ">
-            <select class="custom-select " multiple>
-              <option selected>Competências</option>
+            <select class="custom-select" id="select" multiple>
               <option value="Python">Python</option>
-              <option value="Javascript">Javascript</option>
+              <option value="JavaScript">JavaScript</option>
               <option value="C#">C#</option>
               <option value="C">C</option>
               <option value="C++">C++</option>

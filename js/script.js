@@ -36,9 +36,6 @@
     }
   ];
 
-  let skillsList = [];
-  let fieldsFilled = [];
-
   let $closeModal = doc.querySelector( '[data-js="modalClose"]' );
   let $saveModal = doc.querySelector( '[data-js="saveApplicant"]' );
 
@@ -51,37 +48,18 @@
     }
   );
 
-  let $fieldName = doc.querySelector( '[data-js="fieldName"]' );
-  let $fieldEmail = doc.querySelector( '[data-js="fieldEmail"]' );
-  let $fieldSalary = doc.querySelector( '[data-js="fieldSalaryExpectation"]' );
-  let $fieldSkills = doc.querySelector( '[data-js="fieldSkills"]' );
-
   let $modal = doc.querySelector( '[data-js="modalApplicant"]' );
-    
-  let $icon = doc.querySelector( '[data-js="searchIcon"]' );
-  let $btn = doc.querySelector( '[data-js="searchBtn"]' ); 
-  let fields = [$inputName, $email, $salary];
-  
-  /**Conteúdo espelhado à direita */
+
+  let $searchBtn = doc.querySelector( '[data-js="searchBtn"]' ); 
+  let $createBtn = doc.querySelector( '[data-js="createBtn"]' );  
+
   function onChange( element1, element2, event ){
     element1.addEventListener( event, function(){
       element2.value = element1.value;
     }, false);
   } 
 
-  onChange( $inputName, $fieldName, 'input' );
-  onChange( $email, $fieldEmail, 'input' );
-  onChange( $salary, $fieldSalary, 'input' );
 
-  document.addEventListener('change', showBtn, false);
-
-  function showBtn( e ){
-    fields.forEach( function(field){ 
-      field !== ""
-      ? $btn.className = 'btn btn-primary appear' 
-      : ''});
-  }
-  
   function addSkill( e ){
     if ( this.checked ){
       skillsList.push( this.value );
@@ -101,34 +79,57 @@
   function searchApplicant( event ){
     event.preventDefault();
     $modal.className = "modal collapse show";
-    isItFilled();
+   
 
-    if ( fieldsFilled.indexOf( 'applicant' ) !== -1 )
-      searchByName();
+    let bySalary = [];
+    let bySkills = [];
 
-    if ( fieldsFilled.indexOf( 'emailApplicant' ) !== -1 )
-      searchByEmail();
+    console.log(fieldsFilled);
+
+    fieldsFilled.forEach( function(item) {
+      byName = candidates.filter( function(itemCand){
+        return itemCand.name == item.value;
+      });
+    });
+
+    fieldsFilled.forEach( function(item) {
+      byEmail = candidates.filter( function(itemCand){
+        return itemCand.email == item.value;
+      });
+    });
+
+    }
+
+
+    if ( fieldsFilled.indexOf( 'applicant' ) !== -1 ){
+      byName = searchByName();
+    }
+
+    // if ( fieldsFilled.indexOf( 'emailApplicant' ) !== -1 )
+    //   searchByEmail();
     
-    if ( fieldsFilled.indexOf( 'salaryExpectation' ) !== -1 )
-      searchBySalary();
+    // if ( fieldsFilled.indexOf( 'salaryExpectation' ) !== -1 )
+    //   searchBySalary();
 
     fieldsFilled = [];
-    }    
+    
   
   /**Verifica os campos preenchidos */
   function isItFilled(){
     let result = fields.forEach( function( field ){
       if ( field.value != "" )
-        fieldsFilled.push(field.id);
+        fieldsFilled.push(field);
     });
   }
 
+
+  
+
   /** Buscas */
   function searchByName(){
-    let byName = candidates.filter( function( item ){
+    return candidates.filter( function( item ){
       return item.name == $inputName.value;
     });
-    return byName;
   }
 
   function searchByEmail(){

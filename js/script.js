@@ -100,7 +100,7 @@
     });
 
     if ($salaryFilter.value != '' && arrFilter.length != 0){
-      //code
+      busca = searchBoth();
     }
 
     if ($salaryFilter.value == '' && arrFilter.length != 0)
@@ -118,10 +118,22 @@
     arrFilter = [];
   }
 
+  /**Search functions */
+  function searchBoth(){
+    let bySalary = searchForSalary();
+    let bySkills = searchForSkills();
+    let fullSearch = bySkills.filter( function( cand ){
+        return cand.salaryExpectation <= +$salaryFilter.value;
+      });
+    //console.log(fullSearch);
+    return fullSearch;
+  }
+
   function searchForSalary(){
-    let bySalary = candidates.filter( function( item ){
-      return item.salaryExpectation <= +$salaryFilter.value;
+    let bySalary = candidates.filter( function( cand ){
+      return cand.salaryExpectation <= +$salaryFilter.value;
     });
+    //console.log(bySalary);
     return bySalary;
   }
 
@@ -132,6 +144,7 @@
         return cand.skills.indexOf(item) != -1 ;
       });
     });
+    //console.log(bySkills);
     return bySkills;
   };
   

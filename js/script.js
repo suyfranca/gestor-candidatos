@@ -71,6 +71,10 @@
       || skillsList.length == 0){
         return alert( "Preencha todos os campos." );
     }
+    if ( $email.value.match( /\w.+?@\w+.\w\w+(?:.\w\w)?/g ) === null ){
+      return alert( "Digite um e-mail válido." )
+    }
+
     let candidate = {
       fullName: $inputName.value,
       email: $email.value,
@@ -81,10 +85,6 @@
     alert('Candidato cadastrado.');
     $form.reset();    
   }
-  
-  // $skillsFilter.addEventListener('change', function(){
-  //   let index = $skillsFilter.selectedIndex;
-  // })
 
   /** Search */
   $searchBtn.addEventListener( 'click', searchApplicant, false );

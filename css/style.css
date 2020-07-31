@@ -9,6 +9,9 @@
 .column {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+}
+
+.start {
+  align-items: flex-start;
 }

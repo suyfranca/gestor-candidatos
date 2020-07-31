@@ -3,28 +3,29 @@
 
   let candidates = [
     { 
-      fullName: 'João Batista',
+      fullName: 'João Batista da Silva',
       email: 'jbatista@gmail.com',
       salaryExpectation: 2200,
       skills: [ 'JavaScript', 'CSS', 'HTML', 'Linux' ]
     },
     { 
-      fullName: 'Matheus Silva',
+      fullName: 'Matheus Silva Ferreira',
       email: 'msilva@gmail.com',
       salaryExpectation: 3500,
-      skills: [ 'Java', 'Gestão', 'PHP', 'Linux' ]
+      skills: [ 'Java', 'JavaScript', 'Gestão', 'PHP', 'Linux', 'Photoshop', 
+        'C++', 'Gestão' ]
     },
     { 
-      fullName: 'Ana Beatriz',
+      fullName: 'Ana Beatriz Vasconcelos',
       email: 'abeatriz@gmail.com',
       salaryExpectation: 1000,
       skills: [ 'HTML' ]
     },
     { 
-      fullName: 'Marcos Sousa',
+      fullName: 'Marcos Sousa Abreu',
       email: 'msousa@gmail.com',
       salaryExpectation: 1900,
-      skills: [ 'HTML', 'CSS', 'JavaScript' ]
+      skills: [ 'HTML', 'CSS', 'JavaScript', 'Linux' ]
     }
   ];
 
@@ -51,6 +52,7 @@
 
   let skillsList = [];
 
+  /**Skills checkbox */
   function addSkill( e ){
     if ( this.checked ){
       skillsList.push( this.value );
@@ -60,8 +62,7 @@
     }
   }
 
-  /**Create */
-  
+  /**Create */  
   $createBtn.addEventListener( 'click', addCandidate, false );
 
   function addCandidate( e ){
@@ -81,14 +82,14 @@
     $form.reset();    
   }
   
-  $skillsFilter.addEventListener('change', function(){
-    let index = $skillsFilter.selectedIndex;
-  })
+  // $skillsFilter.addEventListener('change', function(){
+  //   let index = $skillsFilter.selectedIndex;
+  // })
 
   /** Search */
   $searchBtn.addEventListener( 'click', searchApplicant, false );
 
-  let arrFilter = []; // array do filtro solicitado
+  let arrFilter = []; // Array from HTMLCollection (select)
 
   function searchApplicant( event ){
     event.preventDefault();
@@ -120,12 +121,12 @@
 
   /**Search functions */
   function searchBoth(){
-    let bySalary = searchForSalary();
     let bySkills = searchForSkills();
+    console.log(bySkills)
     let fullSearch = bySkills.filter( function( cand ){
         return cand.salaryExpectation <= +$salaryFilter.value;
       });
-    //console.log(fullSearch);
+    console.log(fullSearch);
     return fullSearch;
   }
 
@@ -133,43 +134,73 @@
     let bySalary = candidates.filter( function( cand ){
       return cand.salaryExpectation <= +$salaryFilter.value;
     });
-    //console.log(bySalary);
+    console.log(bySalary);
     return bySalary;
   }
 
   function searchForSkills(){
-    let bySkills;
-    arrFilter.forEach( function( item ){
-      bySkills = candidates.filter( function(cand){
-        return cand.skills.indexOf(item) != -1 ;
-      });
+    let bySkills = candidates.filter( function( cand ){ 
+      return arrFilter.every( (skill, index, array) => 
+        cand.skills.indexOf( skill ) != -1 )
     });
-    //console.log(bySkills);
-    return bySkills;
-  };
+    console.log(bySkills);
+    return (bySkills);
+  }
   
   /** Modal */
 
   function showInModal( elem ){
+    /**Result is empty */
     if (elem == undefined || elem.length == 0){
       let $modalElement = doc.createElement('p');
       let $modalText = doc.createTextNode( 
         'Não há resultados para esse filtro.' 
       ); 
-
       $modalElement.appendChild($modalText);
       $modalBody.appendChild($modalElement);
-      return console.error('Sem resultados')
+      return 
     }
+    /** Return results table */
+    let $table = doc.createElement('table');
+    $table.setAttribute('class', 'table d-flex column start')
     elem.forEach( function(e){
-      let $modalElement = doc.createElement('p');
+      let $tr1 = doc.createElement('row');
+      let $td = doc.createElement('td');
+      let $link = doc.createElement('a');
       let $modalText = doc.createTextNode( e.fullName ); 
 
-      $modalElement.appendChild($modalText);
-      $modalBody.appendChild($modalElement);
+      $link.setAttribute('href', '#');
+
+      $link.appendChild($modalText);
+      $td.appendChild($link);
+      $tr1.appendChild($td);
+      $table.appendChild($tr1);
+      $modalBody.appendChild($table);
+
+      /**Event for candidate link */
+      $link.addEventListener('click', function(){
+        let $tr = doc.createElement('row');
+        let $tdEmail = doc.createElement('td');
+        let $tdSalary = doc.createElement('td');
+        let $tdSkills = doc.createElement('td');
+        let $dEmail = doc.createTextNode( e.email );
+        let $dSalary = doc.createTextNode( e.salaryExpectation );
+        let $dSkills = doc.createTextNode( e.skills.join(', ') );
+
+        $tdSkills.appendChild($dSkills);
+        $tdSalary.appendChild($dSalary);
+        $tdEmail.appendChild($dEmail);
+        $tr.appendChild($tdEmail);
+        $tr.appendChild($tdSalary);
+        $tr.appendChild($tdSkills);
+        $tr1.appendChild($tr);
+        $link.setAttribute('class', 'h6 text-primary');
+      }, false);
+
     });
   }
 
+  /**close button from table */
   $closeModal.addEventListener( 'click', closeModal, false );
 
   function closeModal( event ){

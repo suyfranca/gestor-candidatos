@@ -49,6 +49,8 @@
   let $createBtn = doc.querySelector( '[data-js="createBtn"]' );  
 
   let $form = doc.getElementById( 'form' );
+  let $fragmentCandidate = doc.createDocumentFragment();
+  let $fragmentCandidateInfo = doc.createDocumentFragment();
 
   let skillsList = [];
 
@@ -150,7 +152,7 @@
   /** Modal */
 
   function showInModal( elem ){
-    /**Result is empty */
+    /** Result is empty */
     if (elem == undefined || elem.length == 0){
       let $modalElement = doc.createElement('p');
       let $modalText = doc.createTextNode( 
@@ -175,10 +177,12 @@
       $td.appendChild($link);
       $tr1.appendChild($td);
       $table.appendChild($tr1);
-      $modalBody.appendChild($table);
+      $fragmentCandidate.appendChild($table);
+
+      $modalBody.appendChild($fragmentCandidate);
 
       /**Event for candidate link */
-      $link.addEventListener('click', function(){
+      $link.addEventListener('click', function addInfo(){
         let $tr = doc.createElement('row');
         let $tdEmail = doc.createElement('td');
         let $tdSalary = doc.createElement('td');
@@ -193,8 +197,12 @@
         $tr.appendChild($tdEmail);
         $tr.appendChild($tdSalary);
         $tr.appendChild($tdSkills);
-        $tr1.appendChild($tr);
+        $fragmentCandidateInfo.appendChild($tr);
+
+        $tr1.appendChild($fragmentCandidateInfo);
+
         $link.setAttribute('class', 'h6 text-primary');
+        $link.removeEventListener('click', addInfo);
       }, false);
 
     });

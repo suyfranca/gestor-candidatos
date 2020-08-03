@@ -15,3 +15,8 @@
 .start {
   align-items: flex-start;
 }
+
+.m-body {
+  height: 250px;
+  overflow-y: auto;
+}
